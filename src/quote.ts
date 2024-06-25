@@ -28,6 +28,10 @@ import {
   decodeCalldata as kyberswapDecodeCalldata,
 } from "./dexs/kyberswap";
 
+import {
+  getQuote as onetwoswapGetQuote,
+} from "./dexs/12swap/getQuote";
+
 export interface QuoteParams {
   fromToken: string;
   fromTokenDecimals: number;
@@ -86,6 +90,9 @@ export const getQuote = async (
       return await uniswapGetQuote(params, api);
     case DEX_ENUM.KYBERSWAP:
       return await kyberswapGetQuote(params, api);
+    case DEX_ENUM.ONETWOSWAP:
+        console.log("in case getQuote12swap");
+      return await onetwoswapGetQuote(id, params, api);
     default:
       throw new Error(`${id} is not supported!`);
   }
